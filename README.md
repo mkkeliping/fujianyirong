@@ -1,2 +1,2 @@
 # 学习文档
-* git gith区别
+* git github gitlab的区别
