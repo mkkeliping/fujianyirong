@@ -37,7 +37,16 @@ git reflog //查看你的所有操作。这个作用是我们关闭电脑或者�
 ### 工作区和暂存区
 工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。
 ![工作区与暂存区工作流程图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)
-
+注：<br>
+如图所示，要提交一个文件，必须从一个状态提交到另一个状态，不能跨状态进行提交。在工作去编辑了一个readme1，提交到暂存区，这时又修改了工作区变成readme2，当使用命令git commit命令进行提交时，提交的时readme1。
+```.c
+git checkout -- file  //没有提交到暂存区，回到工作区上一版本文件，是开始编辑的状态。
+git checkout -- file   //提交到暂存区，在工作区进行修改，这时工作区回到提交到暂存区的状态
+git reset HEAD file    //提交到暂存区，回到工作区，使之需要开始的一系列步骤，这时不在暂存区。
+                        //一旦你提交到远程就不可以了，可能会被看到。
+```
+在不知道命令时可以利用git status命令查看目前状态，系统会提供相关命令。
+### 删除文件
 
 ## git github gitlab的区别
 Git是版本控制系统，Github是在线的基于Git的代码托管服务，Github有个小缺陷 (也不能算是缺陷吧), 就是你的repo(repository的缩写，表示“仓库”)都需要public(公开), 如果你想要创建private(私人)的repo, 那得付钱。
