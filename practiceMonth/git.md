@@ -36,6 +36,7 @@ git reflog //查看你的所有操作。这个作用是我们关闭电脑或者�
 当版本号进行变换
 ### 工作区和暂存区
 工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。
+[图片]（https://github.com/mkkeliping/fujianyirong/tree/master/picture）
 
 
 ## git github gitlab的区别
