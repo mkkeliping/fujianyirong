@@ -37,9 +37,9 @@ git reflog //查看你的所有操作。这个作用是我们关闭电脑或者�
 注：版本变换可以这么快是因为Git内部有个指向当前版本的HEAD指针，当版本变换时只需要把指针进行变换即可，指针指向哪里版本号就定位在那里。<br>
 当版本号进行变换
 ## 工作区和暂存区
-工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。
+工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。<br><br>
 ![工作区与暂存区工作流程图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)<br><br>
-注：<br>
+注：
 如图所示，要提交一个文件，必须从一个状态提交到另一个状态，不能跨状态进行提交。在工作去编辑了一个readme1，提交到暂存区，这时又修改了工作区变成readme2，当使用命令git commit命令进行提交时，提交的时readme1。
 ```.c
 git checkout -- file  //没有提交到暂存区，回到工作区上一版本文件，是开始编辑的状态。
