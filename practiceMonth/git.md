@@ -34,7 +34,9 @@ git reflog //查看你的所有操作。这个作用是我们关闭电脑或者�
 ```
 注：版本变换可以这么快是因为Git内部有个指向当前版本的HEAD指针，当版本变换时只需要把指针进行变换即可，指针指向哪里版本号就定位在那里。<br>
 当版本号进行变换
-### 
+### 工作区和暂存区
+工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。
+
 
 ## git github gitlab的区别
 Git是版本控制系统，Github是在线的基于Git的代码托管服务，Github有个小缺陷 (也不能算是缺陷吧), 就是你的repo(repository的缩写，表示“仓库”)都需要public(公开), 如果你想要创建private(私人)的repo, 那得付钱。
