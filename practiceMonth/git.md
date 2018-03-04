@@ -25,7 +25,8 @@ git commit -m  提交的本次文件修改说明//提交文件，提交的说明
 ```
 git log  //查看当前提交的所有版本
 git log  --pretty=oneline//查看所有提交版本的简单形式，其中包含版本号ID，提交说明
-git reset --hard HEAD //表示当前版本，后面多加一个^表示上一版本，为了方便表示可以利用HEAD~表示返回上几个版本，例如：HEAD~100
+git reset --hard HEAD 
+//表示当前版本，后面多加一个^表示上一版本，为了方便表示可以利用HEAD~表示返回上几个版本，例如：HEAD~100
 ```
 2. 当我们返回到之前版本时，如果再想回来怎么办，我们可以进行以下操作：
 ```
@@ -47,7 +48,32 @@ git reset HEAD file    //提交到暂存区，回到工作区，使之需要�
 ```
 在不知道命令时可以利用git status命令查看目前状态，系统会提供相关命令。
 ### 删除文件
-
+当文件没有用时，我们删除文件，同时可以删除git里面文件，如果仅仅删除工作空间文件还可以恢复
+```
+rm file.txt   //删除文件
+git rm file.txt  git commit  //删除git仓库中的文件，并且提交，这时仓库中删除，不能再返回。
+git checkout -- file.txt  //如果没有删除仓库中文件，只是删除工作区的文件可以利用此命令恢复。
+```
+## 远程仓库
+1. 首先在GitHub中创建仓库，然后需要关联本地仓库
+```
+git remote add origin git@github.com:michaelliao/learngit.git //后面的可以找到仓库进行复制相关地址
+```
+第一次进行关联会出现SSH警告，这时我们只需要输入YES然后点击回车即可.
+2. 本地库推送到远程库
+```
+git push -u origin master 
+```
+注：<br>
+把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。远程库的名字就是origin,默认叫法，可以修改。<br>
+第一次推送需要加上-u目的是为了建立本地和远程的关联。在下次进行推送时，可以直接使用git push.<br>
+在推送过程中如果推送失败，那是因为你的SSH Key公钥不在我的账户列表中，解决办法:<br>
+打开git brash————输入命令：ssh -keygen -t rsa -c 邮箱，一路回车————在提示的目录文件中打开会看到id——rsa.pub和-ssh id_rsa,复制公有的文件锁，相当于一把钥匙，可以上传远程仓库—————打开GitHub，找到SSHKEY界面，new一个，粘贴进去提交就成功了。
+3. 从远程库克隆
+```
+git clone git@github.com:michaelliao/gitskills.git
+```
+后面地址有两种形式，一种是原生态的git协议，这个形式速度较快。另一种是HTTP协议，为了支持必须使用此形式的下载。
 ## git github gitlab的区别
 Git是版本控制系统，Github是在线的基于Git的代码托管服务，Github有个小缺陷 (也不能算是缺陷吧), 就是你的repo(repository的缩写，表示“仓库”)都需要public(公开), 如果你想要创建private(私人)的repo, 那得付钱。
 不过, 幸好, Gitlab解决了这个问题, 可以在上面创建免费的私人repo。
