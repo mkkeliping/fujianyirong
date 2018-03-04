@@ -60,7 +60,7 @@ git checkout -- file.txt  //如果没有删除仓库中文件，只是删除工
 git remote add origin git@github.com:michaelliao/learngit.git //后面的可以找到仓库进行复制相关地址
 ```
 第一次进行关联会出现SSH警告，这时我们只需要输入YES然后点击回车即可.
-2. 本地库推送到远程库
+2. 本地库推送到远程库<br>
 ```
 git push -u origin master 
 ```
@@ -69,7 +69,7 @@ git push -u origin master
 第一次推送需要加上-u目的是为了建立本地和远程的关联。在下次进行推送时，可以直接使用git push.<br>
 在推送过程中如果推送失败，那是因为你的SSH Key公钥不在我的账户列表中，解决办法:<br>
 打开git brash————输入命令：ssh -keygen -t rsa -c 邮箱，一路回车————在提示的目录文件中打开会看到id——rsa.pub和-ssh id_rsa,复制公有的文件锁，相当于一把钥匙，可以上传远程仓库—————打开GitHub，找到SSHKEY界面，new一个，粘贴进去提交就成功了。
-3. 从远程库克隆
+3. 从远程库克隆<br>
 ```
 git clone git@github.com:michaelliao/gitskills.git
 ```
