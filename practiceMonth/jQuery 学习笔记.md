@@ -3,7 +3,8 @@
 jQuery是“写的更少，但做的更多”的轻量级 JavaScript 库，基本可以完成操作：HTML 元素选取和元素操作、CSS 操作、HTML 事件函数、JavaScript 特效和动画、HTML DOM 遍历和修改、Utilities。
 ## jQuery使用
 
-**添加jQuery库**
+**添加jQuery库**            
+
 本地版添加：首先下载jQuery库，可去官网[下载](http://jquery.com/download/#Download_jQuery),其中development是开发版未压缩供开发使用，另一个是production是压缩版供成品使用。下载完成后利用下述代码把其加进来，或者可以利用从Google 或 Microsoft 加载 CDN jQuery 核心文件。
   ```.html
   <head>
