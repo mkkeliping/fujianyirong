@@ -54,15 +54,17 @@ jQuery是“写的更少，但做的更多”的轻量级 JavaScript 库，基�
      如果存在名称冲突，则重命名 jQuery 库<br>
   
 ## jQuery效果
- * 显示与隐藏效果
-  ```
- $(selector).hide(speed,callback); //
+
+ **显示与隐藏效果**             
+ 
+ ```.html
+ $(selector).hide(speed,callback); 
  $(selector).show(speed,callback);
  $(selector).toggle(speed,callback);
   ```
 selector表示选中的条件，比如选中段落，或者ID之类的东东，speed表示显示与隐藏的速度，可以取以下值："slow"、"fast" 或毫秒，可选的 callback 参数是隐藏或显示完成后所执行的函数名称。
 
- * 淡入与淡出效果
+ **淡入与淡出效果**
  ```
  $(selector).fadeIn(speed,callback); //淡入
  $(selector).fadeOut(speed,callback); //淡出
