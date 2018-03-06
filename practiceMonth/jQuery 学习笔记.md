@@ -72,26 +72,26 @@ selector表示选中的条件，比如选中段落，或者ID之类的东东，s
  $(selector).fadeTo(speed,opacity,callback); //加入透明度
  ```
  
- * 滑动
+ **滑动**
  ```
  $(selector).slideDown(speed,callback); //向下滑动
  $(selector).slideUp(speed,callback);   //向上滑动
  $(selector).slideToggle(speed,callback); //切换滑动
  ```
  
- * 动画
+ **动画**
  ```
  $(selector).animate({params},speed,callback);
  ```
 paramsb表示动画样式。对于params，可以直接写出变化的样式格式css，可以写出多个样式，也就是里面包括多种样式依次交换，也可以进行字体变化[详细](http://www.w3school.com.cn/jquery/jquery_animate.asp)
 
- * stop()
+ **stop()**
  ```
  $(selector).stop(stopAll,goToEnd);
  ```
  stopAll,goToEnd都是默认false， stopAll表示即仅停止活动的动画，如果为false(默认)允许任何排入队列的动画向后执行，如果为TRUE表示所有的都停止。goToEnd 参数规定是否立即完成当前动画默认为false，不立即完成当前动画，如果为true表示立即完成当前动画，一步到位。
  
-* jQuery Callback 函数
+**jQuery Callback 函数**
    ```
    1:$("p").hide(1000);
      alert("The paragraph is now hidden");
@@ -101,7 +101,7 @@ paramsb表示动画样式。对于params，可以直接写出变化的样式格�
    ```
  代码是按顺序执行的，第一种情况p没有隐藏提示框就会出来，为了避免这种事情，我们可以使用第二种情况Callback，把函数写在里面就会消失了再出现。
  
-* jQuery 方法链接
+**jQuery 方法链接**
 Chaining 允许我们在一条语句中允许多个 jQuery 方法（在相同的元素上）如需链接一个动作，您只需简单地把该动作追加到之前的动作上。
 
 ## jQuery HTML
