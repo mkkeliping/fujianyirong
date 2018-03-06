@@ -2,6 +2,7 @@
 ## jQuery简介
 jQuery是“写的更少，但做的更多”的轻量级 JavaScript 库，基本可以完成操作：HTML 元素选取和元素操作、CSS 操作、HTML 事件函数、JavaScript 特效和动画、HTML DOM 遍历和修改、Utilities。
 ## jQuery使用
+
 **添加jQuery库**
 本地版添加：首先下载jQuery库，可去官网[下载](http://jquery.com/download/#Download_jQuery),其中development是开发版未压缩供开发使用，另一个是production是压缩版供成品使用。下载完成后利用下述代码把其加进来，或者可以利用从Google 或 Microsoft 加载 CDN jQuery 核心文件。
   ```.html
@@ -21,7 +22,8 @@ jQuery是“写的更少，但做的更多”的轻量级 JavaScript 库，基�
 * 基础语法是：$(selector).action()
 * 美元符号定义 jQuery，相当于把元素加进到jQuery
 *  选择符（selector）“查询”和“查找” HTML 元素
-*  jQuery 的 action() 执行对元素的操作  
+*  jQuery 的 action() 执行对元素的操作           
+
 **jQuery 选择器**
 * 元素选择器
   ```
@@ -43,7 +45,8 @@ jQuery是“写的更少，但做的更多”的轻量级 JavaScript 库，基�
    ```
    $("p").css("background-color","red")
    ```
-   元素选择器的其他应用请参考：[用户手册](http://www.w3school.com.cn/jquery/jquery_ref_selectors.asphttp://www.w3school.com.cn/jquery/jquery_ref_selectors.asp)
+   元素选择器的其他应用请参考：[用户手册](http://www.w3school.com.cn/jquery/jquery_ref_selectors.asphttp://www.w3school.com.cn/jquery/jquery_ref_selectors.asp)      
+   
 **jQuery 事件**
 * jQuery 事件处理方法是 jQuery 中的核心函数，事件处理程序指的是当 HTML 中发生某些事件时所调用的方法。术语由事件“触发”（或“激发”）经常会被使用。事件相当于条件语句，放到<head>部分，执行相关操作。
 * jQuery 名称冲突：jQuery 使用 $ 符号作为 jQuery 的简介方式。如果其他也要用jQuery 的$符号那么就会有冲突，我们可以使用var jq=jQuery.noConflict()，帮助您使用自己的名称（比如 jq）来代替 $ 符号。这时就用jq作为标志函数
