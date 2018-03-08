@@ -33,5 +33,6 @@ XHTML	[可扩展HTML](http://en.wikipedia.org/wiki/XHTML)
 **解决问题**我们可以打开myeclipse---->windows---->preferences---->搜索maven---->点击第一个---->添加第二个---->在第一行复制 ：http://repo1.maven.org/maven2/archetype-catalog.xml， 第二行随便起个名字，完成即可。当新建maven项目时，选择自己起的名字就可以新建成功了。                  
 ![maven 新建bug解决图](https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png)        
 
-**问题描述**关于maven本地仓库的设置用user setting进行设置：这一块可以参考网址：https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png    
+**问题描述**关于maven本地仓库的设置用user setting进行设置：这一块可以参考网址：https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png                           
+
 **问题描述** 当新建一个项目出现出现不能点击run as,点击不能出现右边下拉框。并且不能运行，还一直弹出错误提示框，可能是myeclipse有问题，环境坏了，重新安装一下即可解决问题。
