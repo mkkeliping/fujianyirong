@@ -29,7 +29,9 @@ XDoc	[Maven1.x 的文档格式]
 FML	[用于常问问题(FQA)文件](http://maven.apache.org/doxia/references/fml-format.html)
 XHTML	[可扩展HTML](http://en.wikipedia.org/wiki/XHTML)             
 ## maven BUG
-问题描述：点击new---->project---->maven project---->在里面选择org.apache.maven.archetypes:maven-archetype-quickstart:jar:1.1t---->点击下一步会出现---->完成---->出现两个个方框提示找不到，错误提示为：Maven-Could not resolve artifact org.apache.maven.archetypes:maven-archetype-quickstart:jar:1.1。<br>
-解决问题：我们可以打开myeclipse---->windows---->preferences---->搜索maven---->点击第一个---->添加第二个---->在第一行复制 ：http://repo1.maven.org/maven2/archetype-catalog.xml， 第二行随便起个名字，完成即可。当新建maven项目时，选择自己起的名字就可以新建成功了。                  
-![maven 新建bug解决图](https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png)
-问题描述：关于maven本地仓库的设置用user setting进行设置：这一块可以参考网址：https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png
+**问题描述**点击new---->project---->maven project---->在里面选择org.apache.maven.archetypes:maven-archetype-quickstart:jar:1.1t---->点击下一步会出现---->完成---->出现两个个方框提示找不到，错误提示为：Maven-Could not resolve artifact org.apache.maven.archetypes:maven-archetype-quickstart:jar:1.1。<br>
+**解决问题**我们可以打开myeclipse---->windows---->preferences---->搜索maven---->点击第一个---->添加第二个---->在第一行复制 ：http://repo1.maven.org/maven2/archetype-catalog.xml， 第二行随便起个名字，完成即可。当新建maven项目时，选择自己起的名字就可以新建成功了。                  
+![maven 新建bug解决图](https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png)        
+
+**问题描述**关于maven本地仓库的设置用user setting进行设置：这一块可以参考网址：https://github.com/mkkeliping/fujianyirong/blob/master/picture/mavenBug.png    
+**问题描述** 当新建一个项目出现出现不能点击run as,点击不能出现右边下拉框。并且不能运行，还一直弹出错误提示框，可能是myeclipse有问题，环境坏了，重新安装一下即可解决问题。
