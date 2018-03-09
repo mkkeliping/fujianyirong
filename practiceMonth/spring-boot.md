@@ -17,7 +17,7 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
 * 创建可执行JAR。要在 Eclipse 中运行 Maven 构建，请右键单击 POM 文件并选择 Run As > Maven Build。在 Goals 文本字段中，输入 clean 和 package，然后单击 Run 按钮。这一步是打jar包，这个相当于整个项目，可以执行，也方便部署。
 * 运行可执行jar。                                       
  **注:**           
- 测试：run as maven build..      goals 输入 clean test <br>                       
+ 测试：run as maven build..      goals 输入 clean test <br> 
  打包：run as maven build..      goals 输入 clean package<br> 
  打包并发送到本地仓库：run as maven build..    goals 输入 clean install
 
