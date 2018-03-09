@@ -31,7 +31,19 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
 ![mavenbug1](https://github.com/mkkeliping/fujianyirong/blob/master/picture/springbug2.png)
 
 解决方案：要配置具体菜单路径如下： window–>preferences–>Maven–>User Settings 在弹出窗口的右侧，在User Settings的地方找到maven的setting文件，然后把路径加载进来即可。这个user setting文件中含有仓库所在地址，所以当仓库地址不是默认地址时，我们需要对文件中的仓库属性进行修改，使之相匹配。同时需要对编程环境中的maven文件进行修改。[maven中的user setting详细解释](https://www.cnblogs.com/DreamDrive/p/5571916.html)
-
+## 创建复杂的应用程序
+**获取代码**
+```
+git clone https://github.com/makotogo/odotCore 
+git clone https://github.com/makotogo/SpringBootDemo
+```                    
+**导入项目**
+file---->import----->maven------existing project
+**构建可执行jar**
+此处参考上文注。打jar包             
+**运行可执行jar**
+![运行自己打的jar包]()                 
+执行语句：java -jar target/SpringBootDemo-1.0-SNAPSHOT.jar
 
 
 
