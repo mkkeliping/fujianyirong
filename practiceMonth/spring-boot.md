@@ -27,10 +27,10 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
  ![端口被占用](https://github.com/mkkeliping/fujianyirong/blob/master/picture/springbug1.png)          
  
 解决方法：在src->main->resources目录下新建一个文件，名称为application.properties（这是SpringBoot统一的配置文件）加了以下一行内容：（取个电脑上可用的端口号，如下面的9527，看过星爷电影的都懂的）server.port = 9527。重新运行即可使用。                             
-* 问题描述：当文件的jar包加载不进来或者打包出现问题时，可能出现的是maven问题，这时就要查看maven配置是否有问题如图所示。user setting中的默认地址时maven仓库地址，但是默认情况下是没有这个文件的，这时我们需要进行修改，修改为maven文件中的文件所在的路径。                    
-![mavenbug1]()
+* 问题描述：当文件的jar包加载不进来或者打包出现问题时，可能出现的是maven问题，这时就要查看maven配置是否有问题如图所示。user setting中的默认地址时maven仓库地址(C:\Users\木可\.m2\repository)，但是默认情况下是没有这个文件的，这时我们需要进行修改，修改为maven文件中含有user setting文件所在的路径。                    
+![mavenbug1](https://github.com/mkkeliping/fujianyirong/blob/master/picture/springbug2.png)
 
-解决方案：要配置具体菜单路径如下： window–>preferences–>Maven–>User Settings 在弹出窗口的右侧，在User Settings的地方找到maven的setting文件，然后把路径加载进来即可。这个maven setting文件内容包含了仓库所在地址，所以当仓库不是所在地址时，我们需要对文件进行仓库位置修改，也需要对环境中的maven文件进行修改
+解决方案：要配置具体菜单路径如下： window–>preferences–>Maven–>User Settings 在弹出窗口的右侧，在User Settings的地方找到maven的setting文件，然后把路径加载进来即可。这个user setting文件中含有仓库所在地址，所以当仓库地址不是默认地址时，我们需要对文件中的仓库属性进行修改，使之相匹配。同时需要对编程环境中的maven文件进行修改。[maven中的user setting详细解释](https://www.cnblogs.com/DreamDrive/p/5571916.html)
 
 
 
