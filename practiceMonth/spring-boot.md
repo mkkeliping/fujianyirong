@@ -21,10 +21,10 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
  打包：run as maven build..      goals 输入 clean package<br> 
  打包并发送到本地仓库：run as maven build..    goals 输入 clean install
  ## BUG调试
- 问题描述：端口被占用，BUG页面显示
+ **1. 问题描述：**端口被占用，BUG页面显示
  ![端口被占用](https://github.com/mkkeliping/fujianyirong/blob/master/picture/springbug1.png)          
  
- 解决方法：在src->main->resources目录下新建一个文件，名称为application.properties（这是SpringBoot统一的配置文件）加了以下一行内容：（取个电脑上可用的端口号，如下面的9527，看过星爷电影的都懂的）server.port = 9527。重新运行即可使用。
+**解决方法：**在src->main->resources目录下新建一个文件，名称为application.properties（这是SpringBoot统一的配置文件）加了以下一行内容：（取个电脑上可用的端口号，如下面的9527，看过星爷电影的都懂的）server.port = 9527。重新运行即可使用。
  
 
 
