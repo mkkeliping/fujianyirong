@@ -20,6 +20,9 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
  测试：run as maven build..      goals 输入 clean test <br> 
  打包：run as maven build..      goals 输入 clean package<br> 
  打包并发送到本地仓库：run as maven build..    goals 输入 clean install
+ ## BUG调试
+ 
+ 
 
 
 
