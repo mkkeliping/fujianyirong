@@ -42,8 +42,7 @@ file---->import----->maven------existing project
 **构建可执行jar**
 此处参考上文注。打jar包             
 **运行可执行jar**                
-在上框中输入cmd就可以切到该目录的命令框。
-![运行自己打的jar包](https://github.com/mkkeliping/fujianyirong/blob/master/picture/goonJar.png)                 
+在上框中输入cmd就可以切到该目录的命令框。![运行自己打的jar包](https://github.com/mkkeliping/fujianyirong/blob/master/picture/goonJar.png)                 
 执行语句：java -jar target/SpringBootDemo-1.0-SNAPSHOT.jar，注意这句话必须在target外目录下。                          
 注：当运行出现错误，如果提示出现端口占用，我们回到软件中，把运行程序的小方框关住，再重新运行，就会成功，当我们运行程序，或者访问时会出现端口占用问题。
 
