@@ -21,13 +21,16 @@ starter 是 Spring Boot 的一个重要组成部分，用于限制您需要执�
  打包：run as maven build..      goals 输入 clean package<br> 
  打包并发送到本地仓库：run as maven build..    goals 输入 clean install
  ## BUG调试
- 问题描述：端口被占用，BUG页面显示                                    
+* 问题描述：端口被占用，BUG页面显示                                    
  
  
  ![端口被占用](https://github.com/mkkeliping/fujianyirong/blob/master/picture/springbug1.png)          
  
-解决方法：在src->main->resources目录下新建一个文件，名称为application.properties（这是SpringBoot统一的配置文件）加了以下一行内容：（取个电脑上可用的端口号，如下面的9527，看过星爷电影的都懂的）server.port = 9527。重新运行即可使用。
- 
+解决方法：在src->main->resources目录下新建一个文件，名称为application.properties（这是SpringBoot统一的配置文件）加了以下一行内容：（取个电脑上可用的端口号，如下面的9527，看过星爷电影的都懂的）server.port = 9527。重新运行即可使用。                             
+* 问题描述：当文件的jar包加载不进来或者打包出现问题时，可能出现的是maven问题，这时就要查看maven配置是否有问题如图所示。user setting中的默认地址时maven仓库地址，但是默认情况下是没有这个文件的，这时我们需要进行修改，修改为maven文件中的文件所在的路径。                    
+![mavenbug1]()
+
+解决方案：要配置具体菜单路径如下： window–>preferences–>Maven–>User Settings 在弹出窗口的右侧，在User Settings的地方找到maven的setting文件，然后把路径加载进来即可。这个maven setting文件内容包含了仓库所在地址，所以当仓库不是所在地址时，我们需要对文件进行仓库位置修改，也需要对环境中的maven文件进行修改
 
 
 
