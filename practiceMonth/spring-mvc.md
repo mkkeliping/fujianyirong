@@ -21,8 +21,8 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
 ## DispatcherServlet说明
 使用spring mvc，配置DispatcherServlet是第一步，这个与我所学习的SSH框架中的web.xml配置文件中的servlet配置一致。DispatcherServl是前置控制器，也是一个servlet，可以配置多个，作用是拦截相符的文件夹，把其分发到相应的controler(action)中来处理。
 代码部分
-```
-<servlet>  
+```.xml
+<servlet>  
     <servlet-name>springMVC</servlet-name> 
     // 多个DispatcherServlet配置通过名字来区别，每个都有上下文对象（WebApplicationContext）子容器）
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
