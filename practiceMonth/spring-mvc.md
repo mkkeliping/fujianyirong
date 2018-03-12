@@ -60,17 +60,8 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
     http://www.springframework.org/schema/context  
     http://www.springframework.org/schema/context/spring-context-3.0.xsd  
     http://www.springframework.org/schema/mvc  
-    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
-  
-  
-    <!-- 自动扫描的包名 -->  
-    <context:component-scan base-package="com.app,com.core,JUnit4" ></context:component-scan>  
-     注：这里是自动扫描包，扫描包中指定的类的注解，常用的注解有
-        @Controller 声明Action组件
-        @Service    声明Service组件    @Service("myMovieLister") 
-        @Repository 声明Dao组件
-        @Component   泛指组件, 当不好归类时. 
-        @RequestMapping("/menu")  请求映射
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
+        @RequestMapping("/menu")  请求映射
         @Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName") 
         @Autowired 用于注入，(srping提供的) 默认按类型装配 
         @Transactional( rollbackFor={Exception.class}) 事务管理
@@ -128,4 +119,34 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
 <!-- 对静态资源文件的访问 -->     
 <mvc:resources mapping="/images/**" location="/images/" />  
 ```
-/images/```*```映射到ResourceHttpRequestHandler进行处理，location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。cache-period 可以使得静态资源进行web cache 
+/images/```**```映射到ResourceHttpRequestHandler进行处理，location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。cache-period 可以使得静态资源进行web cache 
+方法三：使用<mvc:default-servlet-handler/>
+```.xml
+使用<mvc:default-servlet-handler/>
+```
+会把"/```**```" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet.spring会先执行order值比较小的.DefaultAnnotationHandlerMapping的order属性值是：0<mvc:resources/ >自动注册的 SimpleUrlHandlerMapping的order属性值是： 2147483646<mvc:default-servlet-handler/>自动注册 的SimpleUrlHandlerMapping 的order属性值是： 2147483647,所以先进行匹配DefaultAnnotationHandlerMapping再按照order 升序找。
+## 请求如何映射到具体的Action中的方法
+映射到action，有两种方法，一种是基于xml文件，利用SimpleUrlHandlerMapping、BeanNameUrlHandlerMapping进行Url映射和拦截请求。这种方式少用。
+另一种采用注解映射，使用DefaultAnnotationHandlerMapping。
+```.xml
+<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+```
+但前面我们配置了<mvc:annotation-driven />，他会自动注册这个bean,就不须要我们显示的注册这个bean了.以上都可以注入interceptors，实现权限控制等前置工作。并在action类上使用：@Controller,@RequestMapping("/user")进行映射到具体的action中。相当于学习的SSH中取消struts直接利用注解进行访问。
+## Spring中的拦截器
+* Spring为我们提供了：
+ org.springframework.web.servlet.HandlerInterceptor接口，
+ org.springframework.web.servlet.handler.HandlerInterceptorAdapter适配器，实现这个接口或继承此类，可以非常方便的实现自己的拦截器。
+* 拦截器执行时间：Action之前执行:可以进行编码、安全控制等处理；生成视图之前执行：有机会修改ModelAndView；在afterCompletion中：可以根据ex是否为null判断是否发生了异常，进行日志记录。
+* 拦截器执行方式Spring拦截器没有总的拦截器，拦截器相当于HandlerMapping级别的。拦截器执行方式：当一个请求执行时，首先进行HandlerMapping，查找有没有处理器处理这个请求，如果有就进行拦截器，拦截器完成后交给目标控制器。
+* 使用拦截器：
+```.xml
+<mvc:interceptors>   
+    <bean class="com.app.mvc.MyInteceptor" />   
+</mvc:interceptors> 
+<mvc:interceptors >     
+  <mvc:interceptor>     
+        <mvc:mapping path="/user/*" /> <!-- /user/*  -->     
+        <bean class="com.mvc.MyInteceptor"></bean>     
+    </mvc:interceptor>     
+</mvc:interceptors>  
+```
