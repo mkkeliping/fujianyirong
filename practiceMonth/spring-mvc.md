@@ -23,10 +23,13 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
 代码部分
 ```
 <servlet>  
-    <servlet-name>springMVC</servlet-name> // 多个DispatcherServlet配置通过名字来区别，每个都有上下文对象（WebApplicationContext）子容器）
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>//当有访问时，会保存在servletcontext中，也可以取出相关值  
+    <servlet-name>springMVC</servlet-name> 
+    // 多个DispatcherServlet配置通过名字来区别，每个都有上下文对象（WebApplicationContext）子容器）
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    //当有访问时，会保存在servletcontext中，也可以取出相关值  
     <init-param>  
-        <param-name>contextConfigLocation</param-name>指明了配置文件的文件名，不使用默认配置文件名，而使用springMVC.xml配置文件。  
+        <param-name>contextConfigLocation</param-name>
+        指明了配置文件的文件名，不使用默认配置文件名，而使用springMVC.xml配置文件。  
         <param-value>classpath*:/springMVC.xml</param-value> 这里可以有三种形式
         1. 不写,使用默认值:/WEB-INF/<servlet-name>-servlet.xml
         2、<param-value>/WEB-INF/classes/springMVC.xml</param-value>
@@ -37,7 +40,8 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
 </servlet> 
 <servlet-mapping>  
     <servlet-name>springMVC</servlet-name> //拦截成功后，去找这个名字
-    <url-pattern>/</url-pattern> //拦截条件，如果是*.form就是拦截所有的以.form结尾的文件。拦截*.do、*.htm， 例如：/user/add.do传统简单实用。
+    <url-pattern>/</url-pattern> 
+    //拦截条件，如果是*.form就是拦截所有的以.form结尾的文件。拦截*.do、*.htm， 例如：/user/add.do传统简单实用。
 </servlet-mapping>  
 ```
 ## 父子上下文
