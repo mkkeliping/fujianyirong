@@ -107,3 +107,25 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
  
 ```
 ## 如何访问到静态的文件，如jpg,js,css
+如果你的DispatcherServlet拦截"/"，为了实现REST风格，拦截了所有的请求，那么同时对.js,.jpg等静态文件的访问也就被拦截了
+方法一：激活Tomcat的defaultServlet来处理静态文件，要写在DispatcherServlet的前面， 让 defaultServlet先拦截请求，这样请求就不会进入Spring了。应该性能最优吧。Tomcat, Jetty, JBoss, and GlassFish 自带的默认Servlet的名字 -- "default"。每种格式写一遍。
+```
+<servlet-mapping>   
+    <servlet-name>default</servlet-name>  
+    <url-pattern>*.jpg</url-pattern>     
+</servlet-mapping>    
+<servlet-mapping>       
+    <servlet-name>default</servlet-name>    
+    <url-pattern>*.js</url-pattern>    
+</servlet-mapping>    
+<servlet-mapping>        
+    <servlet-name>default</servlet-name>       
+    <url-pattern>*.css</url-pattern>      
+</servlet-mapping>    
+```
+方法二：在spring3.0.4以后版本提供了mvc:resources ，
+```.xml
+<!-- 对静态资源文件的访问 -->     
+<mvc:resources mapping="/images/**" location="/images/" />  
+```
+/images/```*```映射到ResourceHttpRequestHandler进行处理，location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。cache-period 可以使得静态资源进行web cache 
