@@ -142,11 +142,121 @@ UrlBasedViewResolver类 通过配置文件，把一个视图名交给到一个Vi
 ```.xml
 <mvc:interceptors>   
     <bean class="com.app.mvc.MyInteceptor" />   
-</mvc:interceptors> 
+</mvc:interceptors> //总拦截器，拦截所有url,为每个HandlerMapping配置一个拦截器，在映像中总会找到一个控制器，也就会执行拦截器
+
 <mvc:interceptors >     
   <mvc:interceptor>     
         <mvc:mapping path="/user/*" /> <!-- /user/*  -->     
         <bean class="com.mvc.MyInteceptor"></bean>     
     </mvc:interceptor>     
-</mvc:interceptors>  
+</mvc:interceptors>  //总拦截器，拦截匹配url
+
+<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">        
+ <property name="interceptors">        
+     <list>        
+         <bean class="com.mvc.MyInteceptor"></bean>       
+     </list>        
+ </property>        
+</bean>   //HandlerMappint上的拦截器如果是REST风格的URL，静态资源就不会被拦截。因为我们精准的注入了拦截器。
+
+
 ```
+注：  如果使用了<mvc:annotation-driven />， 它会自动注册DefaultAnnotationHandlerMapping 与AnnotationMethodHandlerAdapter 这两个bean,所以就没有机会再给它注入interceptors属性，就无法指定拦截器。当然我们可以通过人工配置上面的两个Bean，不使用 <mvc:annotation-driven />，就可以 给interceptors属性 注入拦截器了。其实我也不建议使用 <mvc:annotation-driven />，而建议手动写详细的配置文件，来替代 <mvc:annotation-driven />，这就控制力就强了。
+## 如何实现全局的异常处理
+总错误处理
+```.xml
+<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+    <property name="defaultErrorView">     
+        <value>/error/error</value>  
+    </property>  
+    <property name="defaultStatusCode">     
+        <value>500</value>  
+    </property>      
+<property name="warnLogCategory">     
+        <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>  
+    </property>      
+</bean>   
+```
+这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类，我们可以将不同的异常映射到不同的jsp页面（通过exceptionMappings属性的配置）。也可以通过HandlerExceptionResolver接口，写一个自己的异常处理程序。spring的扩展性是很好的。也可以为所有的异常指定一个默认的异常提示页面（通过defaultErrorView属性的配置），如果所抛出的异常在exceptionMappings中没有对应的映射，则Spring将用此默认配置显示异常信息。
+```.html
+<%@ page language="java" contentType="text/html; charset=GBK"  
+    pageEncoding="GBK"%>  
+<%@ page import="java.lang.Exception"%>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">  
+<title>错误页面</title>  
+</head>  
+<body>  
+<h1>出错了</h1>  
+<%   
+Exception e = (Exception)request.getAttribute("exception");   //key是exception，也是在SimpleMappingExceptionResolver类默认指定的
+out.print(e.getMessage());   
+%>  
+</body>  
+</html>  
+```
+## 如何给spring3 MVC中的Action做JUnit单元测试
+ 使用了spring3 MVC后，给action做单元测试变得很方便, JUnitActionBase类是所有JUnit的测试类的父类,这是个JUnit测试类，我们可以new Request对象，来参与测试，太方便了。给request指定访问的URL，就可以请求目标Action了。
+## 转发与重定向
+可以通过redirect/forward:url方式转到另一个Action进行连续的处理。
+可以通过redirect:url 防止表单重复提交 。写法如下：return "forward:/order/add"; return "redirect:/index.jsp";
+带参数重定向RedirectAttributes
+```.java
+public String save(@ModelAttribute("group") Group group, RedirectAttributes redirectAttributes) {   
+    accountManager.saveGroup(group);   
+    redirectAttributes.addFlashAttribute("message", "操作成功"); //带参数的重定向
+    return "redirect:/account/group/";   
+}  
+```
+## 处理ajax请求
+1. 引入jar包jackson-core-asl-1.7.2.jar  jackson-mapper-asl-1.7.2.jar
+2. spring的配置文件中要有这一行，才能使用到spring内置支持的json转换。如果你手工把POJO转成json就可以不须要使用spring内置支持的json转换。    <mvc:annotation-driven />
+3. 使用@ResponseBody注解
+## 关于写几个配置文件的说明
+有人把配置文件写两份，原有的applicationContext.xml，这个文件从spring2.0-2.5时一直在使用。别一个是新加的spring MVC的配置文件，springMVC相关的配置，数据源，事务相关配置都可以写在一个配置文件中。最好写一个。如果写两个，就会扫描两次，注意不要重复，写两个可能出现其他的异常。
+## 如何取得Spring管理的bean 
+方法一是利用web.xml中的servlet进行；另一种是在web.xml配置listening进行管理；做通用的方法是神器是
+```.xml
+<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->  
+<bean class="com.xxxxx.SpringContextHolder" lazy-init="false" /> 
+```
+## 多视图控制器
+略，用时再查资料
+## <mvc:annotation-driven /> 到底做了什么工作
+一句 <mvc:annotation-driven />实际做了以下工作：（不包括添加自己定义的拦截器）
+```.xml
+ <!-- 注解请求映射  -->  
+   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">           
+    <property name="interceptors">  
+        <list>     
+            <ref bean="logNDCInteceptor"/>   <!-- 日志拦截器，这是你自定义的拦截器 -->  
+            <ref bean="myRequestHelperInteceptor"/>   <!-- RequestHelper拦截器，这是你自定义的拦截器-->    
+            <ref bean="myPermissionsInteceptor"/>  <!-- 权限拦截器，这是你自定义的拦截器-->    
+            <ref bean="myUserInfoInteceptor"/>  <!-- 用户信息拦截器，这是你自定义的拦截器-->    
+        </list>           
+    </property>           
+</bean>      
+<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+    <property name="messageConverters">     
+        <list>     
+            <ref bean="byteArray_hmc" />     
+            <ref bean="string_hmc" />     
+            <ref bean="resource_hmc" />     
+            <ref bean="source_hmc" />     
+            <ref bean="xmlAwareForm_hmc" />     
+            <ref bean="jaxb2RootElement_hmc" />     
+            <ref bean="jackson_hmc" />     
+        </list>     
+    </property>     
+</bean>     
+<bean id="byteArray_hmc" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="string_hmc" class="org.springframework.http.converter.StringHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="resource_hmc" class="org.springframework.http.converter.ResourceHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="source_hmc" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="xmlAwareForm_hmc" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="jaxb2RootElement_hmc" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" /><!-- 处理.. -->  
+<bean id="jackson_hmc" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" /><!-- 处理json-->  
+```
+注：springMVC.xml配置文件是核心[参考链接](http://elf8848.iteye.com/blog/875830/#)
