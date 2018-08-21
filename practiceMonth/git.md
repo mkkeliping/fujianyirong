@@ -34,8 +34,13 @@ git reset --hard HEAD
 git reset --hard ID号 //如果我们没有关闭代码栏，我们可以查看上面的ID.可以利用版本ID进行返回版本。
 git reflog //查看你的所有操作。这个作用是我们关闭电脑或者找不到版本ID的情况下可以利用这个进行查看
 ```
+版本回退再
 注：版本变换可以这么快是因为Git内部有个指向当前版本的HEAD指针，当版本变换时只需要把指针进行变换即可，指针指向哪里版本号就定位在那里。<br>
-当版本号进行变换
+### 版本回退失误再恢复
+```
+git reflog //是记录员，记录着你的所有操作
+```
+![git操作记录员图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)<br><br>
 ## 工作区和暂存区
 工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。<br><br>
 ![工作区与暂存区工作流程图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)<br><br>
