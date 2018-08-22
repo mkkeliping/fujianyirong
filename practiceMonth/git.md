@@ -29,18 +29,24 @@ git log  --pretty=oneline//查看所有提交版本的简单形式，其中包�
 git reset --hard HEAD 
 //表示当前版本，后面多加一个^表示上一版本，为了方便表示可以利用HEAD~表示返回上几个版本，例如：HEAD~100
 ```
+![git log 操作记录员图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/git02.png)<br><br>
+顺序是操作::版本号::当前版本指针                           作者:: 时间::名称
+
+### 版本回退失误再恢复
+
 * 当我们返回到之前版本时，如果再想回来怎么办，我们可以进行以下操作：
 ```
 git reset --hard ID号 //如果我们没有关闭代码栏，我们可以查看上面的ID.可以利用版本ID进行返回版本。
 git reflog //查看你的所有操作。这个作用是我们关闭电脑或者找不到版本ID的情况下可以利用这个进行查看
 ```
+![git操作记录员图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/git01.png)<br><br>
+该命令显示历史操作，历史操作顺序是倒序。上面显示的信息依次是版本号::分支::head:操作::操作提交的名称。
+注：我们通过版本号（查看自己提交的名称）就可以恢复以前的版本。恢复版本是恢复到工作区。
 版本回退再
 注：版本变换可以这么快是因为Git内部有个指向当前版本的HEAD指针，当版本变换时只需要把指针进行变换即可，指针指向哪里版本号就定位在那里。<br>
-### 版本回退失误再恢复
-```
-git reflog //是记录员，记录着你的所有操作
-```
-![git操作记录员图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)<br><br>
+
+
+
 ## 工作区和暂存区
 工作区就是工作目录，是一个可以看到的工作空间。在仓库中可以把工作区和暂存区这么理解。我们mkdir todoList,然后git init todoList,这时，todoList中可以看到的就是工作区，在todoList仓库（版本库）中，有stage（或者叫index）的暂存区。还有创建仓库时就为我们创建好的分支master。<br><br>
 ![工作区与暂存区工作流程图片](https://github.com/mkkeliping/fujianyirong/blob/master/picture/gitStatus.jpg)<br><br>
